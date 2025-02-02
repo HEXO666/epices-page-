@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ras-El-Hanout - Épices Marocaines</title>
+    <style>
+            /* for the nav menu  */
+          /*=============== GOOGLE FONTS ===============*/
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+/*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --black-color: rgb(255, 255, 255);
+  --black-color-light:hsl(0, 0%, 100%);
+  --black-color-lighten: hsl(0, 0%, 100%);
+  --white-color: black;
+  --body-color: hsl(220, 100%, 97%);
+
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Montserrat", sans-serif;
+  --normal-font-size: .900rem;
+
+  /*========== Font weight ==========*/
+  --font-regular: 400;
+  --font-semi-bold: 600;
+
+  /*========== z index ==========*/
+  --z-tooltip: 20;
+  --z-fixed: 100;
+}
+
+/*========== Responsive typography ==========*/
+@media screen and (min-width: 1024px) {
+  :root {
+    --normal-font-size: 1rem;
+  }
+  
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+}
+ul {
+  list-style: none;
+  /* Color highlighting when pressed on mobile devices */
+  /*-webkit-tap-highlight-color: transparent;*/
+}
+
+a {
+  text-decoration: none;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+/*=============== HEADER ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--black-color);
+  box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
+  z-index: var(--z-fixed);
+}
+
+/*=============== NAV ===============*/
+.nav {
+  height: var(--header-height);
+}
+
+.nav__logo, 
+.nav__burger, 
+.nav__close {
+  color: var(--white-color);
+}
+.nav__burger{ padding-top: 40px;
+size: 25%;
+}
+
+.nav__data {
+  size: 5%;
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center ;
+}
+
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  column-gap: .25rem;
+  font-weight: var(--font-semi-bold);
+  /* Color highlighting when pressed on mobile devices */
+  /*-webkit-tap-highlight-color: transparent;*/
+}
+
+.nav__logo i {
+  font-weight: initial;
+  font-size: 1.25rem;
+}
+
+.nav__toggle {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.nav__burger, 
+.nav__close {
+  position: absolute;
+  width: max-content;
+  height: max-content;
+  inset: 0;
+  margin: auto;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: opacity .1s, transform .4s;
+}
+
+.nav__close {
+  opacity: 0;
+}
+
+/* Navigation for mobile devices */
+@media screen and (max-width: 1118px) {
+  .nav__menu {
+    position: absolute;
+    left: 0;
+    top: 2.5rem;
+    width: 100%;
+    height: calc(100vh - 3.5rem);
+    overflow: auto;
+    pointer-events: none;
+    opacity: 0;
+    transition: top .4s, opacity .3s;
+  }
+  .hide{
+    display: none;
+  }
+  .nav__menu::-webkit-scrollbar {
+    width: 0;
+  }
+  .nav__list {
+    background-color: var(--black-color);
+    padding-top: 1rem;
+  }
+}
+
+.nav__link {
+  color: var(--white-color);
+  background-color: var(--black-color);
+  font-weight: var(--font-semi-bold);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color .3s;
+}
+
+.nav__link:hover {
+  background-color: hsl(40, 22%, 60%);
+}
+
+/* Show menu */
+.show-menu {
+  opacity: 1;
+  top: 3.5rem;
+  pointer-events: initial;
+}
+
+/* Show icon */
+.show-icon .nav__burger {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+.show-icon .nav__close {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/*=============== DROPDOWN ===============*/
+.dropdown__item {
+  cursor: pointer;
+}
+
+.dropdown__arrow {
+  font-size: 1.25rem;
+  font-weight: initial;
+  transition: transform .4s;
+}
+
+.dropdown__link, 
+.dropdown__sublink {
+  padding: 1.25rem 1.25rem 1.25rem 2.5rem;
+  color: var(--white-color);
+  background-color: var(--black-color-light);
+  display: flex;
+  align-items: center;
+  column-gap: .5rem;
+  font-weight: var(--font-semi-bold);
+  transition: background-color .3s;
+}
+
+.dropdown__link i, 
+.dropdown__sublink i {
+  font-size: 1.25rem;
+  font-weight: initial;
+}
+
+.dropdown__link:hover, 
+.dropdown__sublink:hover {
+  background-color: var(--black-color);
+}
+
+.dropdown__menu, 
+.dropdown__submenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s ease-out;
+}
+
+/* Show dropdown menu & submenu */
+.dropdown__item:hover .dropdown__menu, 
+.dropdown__subitem:hover > .dropdown__submenu {
+  max-height: 1000px;
+  transition: max-height .4s ease-in;
+}
+
+/* Rotate dropdown icon */
+.dropdown__item:hover .dropdown__arrow {
+  transform: rotate(180deg);
+}
+
+/*=============== DROPDOWN SUBMENU ===============*/
+.dropdown__add {
+  margin-left: auto;
+}
+
+.dropdown__sublink {
+  background-color: var(--black-color-lighten);
+}
+.nav__logo{
+  size: 80 px;
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 340px) {
+  .container {
+    margin-inline: 1rem;
+  }
+
+  .nav__link {
+    padding-inline: 1rem;
+  }
+}
+
+/* For large devices */
+@media screen and (min-width: 1118px) {
+  .container {
+    margin-inline: auto;
+  }
+
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav__toggle {
+    display: none;
+  }
+  .nav__list {
+    height: 100%;
+    display: flex;
+    column-gap: 3rem;
+  }
+  .nav__link {
+    height: 100%;
+    padding: 0;
+    justify-content: initial;
+    column-gap: .25rem;
+  }
+  .nav__link:hover {
+    background-color:color(srgb red green blue);
+  }
+
+  .dropdown__item, 
+  .dropdown__subitem {
+    position: relative;
+  }
+
+  .dropdown__menu, 
+  .dropdown__submenu {
+    max-height: initial;
+    overflow: initial;
+    position: absolute;
+    left: 0;
+    top: 6rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s, top .3s;
+  }
+
+  .dropdown__link, 
+  .dropdown__sublink {
+    padding-inline: 1rem 3.5rem;
+  }
+
+  .dropdown__subitem .dropdown__link {
+    padding-inline: 1rem;
+  }
+
+  .dropdown__submenu {
+    position: absolute;
+    left: 100%;
+    top: .5rem;
+  }
+
+  /* Show dropdown menu */
+  .dropdown__item:hover .dropdown__menu {
+    opacity: 1;
+    top: 5.5rem;
+    pointer-events: initial;
+    transition: top .3s;
+  }
+
+  /* Show dropdown submenu */
+  .dropdown__subitem:hover > .dropdown__submenu {
+    opacity: 1;
+    top: 0;
+    pointer-events: initial;
+    transition: top .3s;
+  }
+
+}
+        /* for the pahe  */
+
+        /* for the pahe  */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  padding-top: var(--header-height); /* This pushes content below fixed header */
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--black-color);
+  box-shadow: 0 2px 16px hsla(220, 32%, 8%, .3);
+  z-index: var(--z-fixed);
+}
+
+        .header {
+            text-align: center;
+            display: flex;
+            border-bottom: 3px solid #c49b63;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #2a2a2a;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #c49b63;
+            margin: 40px 0 20px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .lead {
+            font-size: 1.4rem;
+            color: #6b6b6b;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .content-section {
+            margin-bottom: 50px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .grid img:hover {
+            transform: scale(1.03);
+        }
+
+
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+          <div class="nav__data">
+             <a href="#" class="nav__logo">
+                <img src="logo.png" class="hide" style="width: 60px; height: auto; position: relative; top: 25px; left: -60px;">
+                </a>  
+             <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line nav__burger"></i>
+                <i class="ri-close-line nav__close"></i>
+             </div>
+          </div>
+    
+          <!--=============== NAV MENU ===============-->
+          <div class="nav__menu" id="nav-menu">
+             <ul class="nav__list">
+                <li><a href="home.html" class="nav__link">Home</a></li>
+    
+                <!--=============== DROPDOWN 2 ===============-->
+                <li class="dropdown__item">
+                   <div class="nav__link">
+                      Nos rubriques <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                   </div>
+    
+                   <ul class="dropdown__menu">
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class=""></i>  L'Anthropologie de la gastronomie
+    
+                         </a>                          
+                      </li>
+    
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class=""></i> L'histoire et l'authenticité
+                         </a>
+                      </li>
+    
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="e"></i> L'inventaire des plats
+                         </a>
+                      </li>
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="e"></i>  Le patrimoine culinaire
+                         </a>
+                      </li>
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="e"></i> La science de l'alimentation
+                         </a>
+                      </li>
+    
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="e"></i> Le rapport du tourisme
+                         </a>
+                      </li>
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="e"></i> Le rôle des restaurants dans le promotion
+                         </a>
+                      </li>
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="e"></i> Importance
+                         </a>
+                      </li>
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="e"></i> Messages
+                         </a>
+                      </li>
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="e"></i> Messages
+                         </a>
+                      </li>
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="ri-message-3-line"></i> Messages
+                         </a>
+                      </li>
+                   </ul>
+                </li>
+    
+                <!--=============== DROPDOWN 1 ===============-->
+                <li class="dropdown__item">
+                   <div class="nav__link">
+                      Nos recettes <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                   </div>
+    
+                   <ul class="dropdown__menu">
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="salees"></i> salées 
+                         </a>                          
+                      </li>
+    
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class=""></i> sucrées
+                         </a>
+                      </li>
+    
+                      <!--=============== DROPDOWN SUBMENU ===============-->
+                      <li class="dropdown__subitem">
+                         <div class="dropdown__link">
+                            <i class="#"></i> autre <i class="ri-add-line dropdown__add"></i>
+                         </div>
+    
+                         <ul class="dropdown__submenu">
+                            <li>
+                               <a href="#" class="dropdown__sublink">
+                                  <i class="#"></i> Boissons et Infusions
+                               </a>
+                            </li>
+    
+                            <li>
+                               <a href="epices.html" class="dropdown__sublink">
+                                  <i class="epi"></i>Condiments et Épices
+                               </a>
+                            </li>
+    
+                            <li>
+                               <a href="#" class="dropdown__sublink">
+                                  <i class="#"></i> pâtisseries 
+                               </a>
+                            </li>
+                         </ul>
+                      </li>
+                   </ul>
+                </li>
+                
+                <li><a href="#" class="nav__link">Livres</a></li>
+    
+                <!--=============== DROPDOWN 2 ===============-->
+                <li class="dropdown__item">
+                   <div class="nav__link">
+                      Articles de recherche   <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                   </div>
+    
+                   <ul class="dropdown__menu">
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="ri-user-line"></i> #
+                         </a>                          
+                      </li>
+    
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="ri-lock-line"></i> #
+                         </a>
+                      </li>
+    
+                      <li>
+                         <a href="#" class="dropdown__link">
+                            <i class="ri-message-3-line"></i> #
+                         </a>
+                      </li>
+                   </ul>
+                </li>
+                <!--=============== DROPDOWN 2 ===============-->
+                <li class="dropdown__item">
+                   <a href="president.html" class="nav__link">
+                   <div class="nav__link">
+                      Mot du Président <i class="ri-arrow-down-s-line dropdown__arrow"></i>
+                   </div>
+                </a>
+    
+                </li>
+    
+                <li><a href="contact.html" class="nav__link">Contact</a></li>
+             </ul>
+          </div>
+       </nav>
+    </header>
+    <br>
+    <br>
+    <br>
+
+    <div class="">
+        <h1 style="text-align: center;">Ras-El-Hanout</h1>
+        <h2>Épices emblématiques et magiques de la gastronomie marocaine</h2>
+    </div>
+
+    <div class="container" >
+        <div class="grid">
+            <img src="https://i0.wp.com/tandysinclair.com/wp-content/uploads/2011/01/Ras-El-Hanout.jpg?ssl=1" alt="Marché d'épices marocain">
+            <img src="https://marrakech-herboristerie.com/wp-content/uploads/2020/06/Ras-el-hanout-m%C3%A9lange-de-35-%C3%A9pices.jpg" alt="Cuisine marocaine traditionnelle">
+            <img src="https://ileauxepices.com/blog/wp-content/uploads/2018/11/ras-el-hanout-maison-1.jpg" alt="Mélange Ras-El-Hanout">
+        </div>
+        
+        <div class="content-section" >
+            <p>Ras-El-Hanout, un nom plein de mystère, cache beaucoup de secrets des femmes artistes et de la gastronomie marocaine. C’est une composition magistrale magique, aux senteurs aromatiques chaudes et sensuelles, et aux saveurs sublimes avec une note légèrement sucrée. Ce mélange des meilleurs épices de la boutique, comme l’indique son nom (tête de la boutique), donne une finesse aux plats et une richesse de goût sans égal nulle part ailleurs. Ce condiment indispensable à la gastronomie marocaine du terroir est le catalyseur des multiples flaveurs de plats ancestraux, tels la M’rouzia, trid, tagine…</p>
+
+            <p>Ce mélange magique d’épices peut compter jusqu’à cinquante épices. Traditionnellement, il se compose d’une vingtaine, mais on peut composer un mélange simplifié d’une dizaine d’épices préparé par l’épicier spécialiste nommé Attar. Toutefois, la composition peut se faire selon la demande du client et selon le désir de la cuisinière ou du cuisinier et/ou du chef en général.</p>
+            
+            <p>Les mélanges d’épices varient selon la demande et la fantaisie des Attar, épicier, le pouvoir d’achat des consommateurs et aussi selon l’utilisation en vue par la cuisinière ou le cuisinier. Mais certaines épices s’avèrent incontournables tels que le gingembre, la cardamome, la muscade, le poivre, le macis, le cubèbe, et le curcuma. Ras-El-Hanout peut également contenir des fleurs séchées, comme des boutons de rose, des variétés de poivres, du clou de girofle, ou du galanga. Les mélanges varient également selon les régions. Traditionnellement, les mélanges doivent contenir un ingrédient aphrodisiaque (gingembre, fruits de frêne ou cantharide).</p>
+
+            <p>Ras-El-Hanout est issu du génie des femmes et des dadas qui faisaient de la bonne cuisine et qui voulaient se démarquer par leur savoir-faire culinaire. C’est une invention des hautes civilisations, surtout des villes anciennes où il faisait bon vivre et où les familles des notables et des familles royales étaient jalouses de cet art culinaire et tenaient à ce que leurs cuisines soient meilleures, d’où parfois l’interdiction aux dadas de sortir ou de dévoiler les secrets de leur cuisine aux voisins. De même, les mamans tenaient à ce que leurs filles cuisinent mieux que celles des voisins. C’était une tradition qui a tendance à disparaître. Ces façons de faire existent chez certaines familles qui maintiennent toujours l’ancestralité de leurs traditions, surtout culinaires, telles que le Palais Royal, certains notables dans les villes anciennes et chez certaines tribus.</p>
+
+            <p>Il existe de nombreuses recettes de Ras-El-Hanout qui est une composition, avec des dosages précis d’épices, selon l’emploi désiré par les cuisiniers et les cuisinières spécialistes d’une gastronomie du terroir. Ces épices sont utilisées dans des préparations du terroir telles que Mrouzia, certains tajines salés sucrés, dans certains couscous doura de Larache, appelé ainsi parce qu’il donne le vertige. Ras-El-Hanout entre également dans certains plats d’hiver qui ont la propriété de réchauffer le corps comme il accommode toujours le gibier ; il parfume également certaines pâtisseries au Moyen-Orient. Ce mélange d’épices se marie bien avec le miel, les amandes et les dattes. Ce mélange d’épices parfume également le café dans certaine région du Maroc. En Europe l’engouement pour le Ras-El-Hanout grandit de jour en jour, en raison des ses vertus et ses arômes qui permettent de relever les goûts des préparation culinaires, agrémente les plats en sauce, relève le goût des poissons blancs et des coquillages, s’accommode avec les légumes sucrés comme les carottes, la courge le navet et parfume le riz.</p>
+        </div>
+
+        <div class="content-section" >
+            <h2>Composition de Ras-El-Hanout</h2>
+            <p>Nous essayerons de vous donner, ci-après un mélange que certains Attars, de Marrakech, Fès, Meknès, Casablanca, Tanger …proposent à leurs clients, dont les ingrédients sont choisis en suivant un dosage bien précis (références – Magazine cuisine Marocaine Saveurs et senteurs, article de Mme Amina Boudraa magazine de cuisine Marocaine N° 20) :</p>
+
+            <ul style="list-style-type: none; padding-left: 20px; margin: 20px 0;">
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr de fruits de frêne (Lissane Tayr) importé d’Europe, considéré comme aphrodisiaque
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 30 gr de macis (Bsibissa), anile qui entoure l’amande de la noix de muscade en provenance de Java et de Sumatra
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 30 gr de cubèbe (Kebbaba) poivre gris parfumé, en provenance de l’Insulinde et Boméo
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 30 gr de cardamome (qaâqalla ou Habbat Hil) graine d’une zingibéracées en provenance de Sri Lanka ou de malabar
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr de poivre de la Jamaïque (Nouiouirat), piment de la Jamaïque (Antilles) très différent des piments malgré son nom
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr de curcuma (kharqoum) famille des gingembres et de cardamone. Le curcuma colore les aliments en jaune est conseillé pour remplacer les colorants artificiels ou le safran pur normalement originaire de l’Inde et d’autres pays tropicaux
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr de poivre blanc en provenance de Sumatra Indonésie
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr de gingembre (Skingber) cultivé en Indochine et au Japon
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 05 gr de safran naturel pur cultivé à Taliouine et à Ourika
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr de poivre long (Dhar El felfel) fruit de piper longum en provenance de l’Inde et de la Malaisie
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 2 gr de noix de muscade (Gouza) originaire de Sumatra et de Java
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr de bouton de rose (Oud aouard) issue des roses de damas importée de Perse par les arabes et cultivées dans les vallées de Dades et de Todra au Maroc
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 2 à 3 grains de cantharide (Doubaba Hindia). Ce produit est issu des régions méditerranéennes
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr d’anis, graines de fenouil et d’anis d’Espagne (Naffaâ, habbat Hlaoua)
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 1 gr de mastic (Masca Hora)
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 30 gr de graines de sésame (Janjlane)
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+                <span style="color: #c49b63; position: absolute; left: 0;">•</span> 20 gr de graine de coriandre sèches (Kozbor)
+            </li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>On peut ajouter à cette composition d’autres épices</h2>
+            <ul style="list-style-type: none; padding-left: 20px; margin: 20px 0;">
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;"></li>
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Galanga (Khoudenja) rhizome d’une Zingibéracée sauvage cultivée en Extrême Orient
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Maniguettes (Gouza Sahraouya) graine d’une Zingibéracée originaire de Côte d’Ivoire
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Cannelle (Karfa) corse de Cannellier, un arbre de la famille de Lauracée cultivé en Inde et en Malaisie
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Cypéracée (Tara Soudania) rhizome très colorant originaire du Soudan
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Clou de Girofle (Oud Enouar - Kronferl) bouton fleurai du Giroflier Myrtacée de Zanzibar
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Inis (Oud Lamber) rhizome de l’Iris Germanica originaire du Haut Atlas Marocain
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Poivre Noir, fruit du Poivrier qui pousse en Asie
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Lavande (Khzama), fleur de la Vandula Vera originaire du Maroc et la France
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> La Cannelle de Chine (Dahr El Cini), écorce d’un arbre de la famille de Lauracées, originaire de l’Asie Tropicale
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Baie de Belladone (Zbibet et Laidor) baies desséchées récoltées à Chefchaouen
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Nigelle (Babbat Saouda) graines cultivées au Maroc
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Gingembre blanc (Skingber biad) plus fin que le classique originaire du Japon
+            </li>
+            <li style="margin-bottom: 15px; padding-left: 1.5rem; text-indent: -1.5rem; position: relative;">
+            <span style="color: #c49b63; position: absolute; left: 0;">•</span> Poivre des moines (Kheroua) baies de gattilier cultivé au Maroc
+            </li>
+            </ul>
+        </div>
+    </section>
+    </div>
+</body>
+</html>
